@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+    <title>Add recipe</title>
+</head>
+<body>
+    <div class= "d-flex justify-content-between">
+        <h1>Add new recipe</h1>
+        <div>
+            <a href="/recipes" class="btn btn-info">Dashboard</a>
+            <a href="/logout" class="btn btn-success">Logout</a>
+        </div>
+    </div>
+    <div>
+        <form action="/create/recipe" method="post" class="bg-secondary text-light col-6 mx-auto">
+            <h2 class="text-center text-warning">Create Recipe:</h2>
+            {% with messages = get_flashed_messages(category_filter=['recipe']) %}
+                {% if messages %}
+                <div class="alert alert-danger" role="alert">
+                    <strong>Oh no! A mistake has been made.</strong>
+                        {% for message in messages %}
+                        <p>{{message}}</p>
+                        {% endfor %}
+                </div>
+                {% endif %}
+            {% endwith %}
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="name" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <input type="text" name="description" id="description" class="form-control">
+            </div>
+            <div>
+                <label for="instructions">Instructions:</label>
+                <textarea name="instructions" class="form-control" id="instructions" cols="30" rows="10"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="under_thirty">Under 30 minutes to prepare?</label>
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="under_thirty" name="under_thirty" value="1" class="custom-control-input" checked="">
+                    <label class="custom-control-label" for="under_thirty">Yes</label>
+                </div>
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="under_thirty2" name="under_thirty" value="0" class="custom-control-input">
+                    <label class="custom-control-label" for="under_thirty2">No</label>
+                </div>
+            </div>
+                <div class="form-group"></div>
+                <input type="submit" value="create" class="btn btn-warning">
+        </form>
+    </div>
+</body>
+</html>

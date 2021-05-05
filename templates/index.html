@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+    <title>Login/Registration</title>
+</head>
+<body>
+    {% with messages = get_flashed_messages(category_filter=['invallogin']) %}
+    {% if messages %}
+    <div class="alert alert-danger" role="alert">
+        <strong>Oh no! A mistake has been made.</strong>
+            {% for message in messages %}
+            <p>{{message}}</p>
+            {% endfor %}
+    </div>
+    {% endif %}
+{% endwith %}
+    <div class="d-flex justify-content-around">
+        <form action="/create_user" method="post" class="p-3 col-5 mx-auto my-5 bg-primary text-dark">
+            <h2 class="text.-center text-dark">Register:</h2>
+            {% with messages = get_flashed_messages(category_filter=['register']) %}
+                {% if messages %}
+                <div class="alert alert-danger" role="alert">
+                    <strong>Oh no! A mistake has been made.</strong>
+                        {% for message in messages %}
+                        <p>{{message}}</p>
+                        {% endfor %}
+                </div>
+                {% endif %}
+            {% endwith %}
+            <div class="form-group">
+                <label for="fname">First Name:</label>
+                <input type="text" name="fname" id="fname" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="lname">Last Name:</label>
+                <input type="text" name="lname" id="lname" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" name="email" id="email" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="cpassword">Confirm Password:</label>
+                <input type="password" name="cpassword" id="cpassword" class="form-control">
+            </div>
+            <input type="submit" value="Register" class="btn btn-success btn-outline-dark">
+        </form>
+        <form action="/login_user" method="post" class="p-3 col-4 mx-auto my-5 bg-info text-dark">
+            <h2 class="text-center text-warning">Login:</h2>
+            {% with messages = get_flashed_messages(category_filter=['login']) %}
+            {% if messages %}
+            <div class="alert alert-danger" role="alert">
+                <strong>Oh no! A mistake has been made.</strong>
+                    {% for message in messages %}
+                    <p>{{message}}</p>
+                    {% endfor %}
+            </div>
+            {% endif %}
+        {% endwith %}
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" name="email" id="email" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" class="form-control">
+            </div>
+            <input type="submit" value="Log in" class="btn btn-warning btn-outline-dark">
+        </form>
+    </div>
+</body>
+</html>
